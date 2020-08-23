@@ -1,0 +1,114 @@
+<section id="course">
+
+    <div class="content-box-md">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <img src="/images/auth/auth_pic.jpg" class="img-fluid">
+                </div>
+
+
+                <div class="col-lg-6">
+                            
+                    <form class="login-form course-form" enctype="multipart/form-data" action="/course" method="POST">
+                        <h1 class="text-center login-welcome">Upload Course</h1>
+                        <div class="form-row justify-content-center">
+                            
+                            <div class="form-group col-md-10 wow fadeInRight" data-wow-duration="1.2s">
+                                    <input type="text" name="header_name" class="form-control" placeholder="Header name" required>
+                            </div>
+
+                            <div class="form-group col-md-10 wow fadeInRight" data-wow-duration="1.4s">
+                                <input type="text" name="author" class="form-control" placeholder="Author" required>
+                            </div>
+
+                            <div class="form-group col-md-10 wow fadeInRight" data-wow-duration="1.6s">
+                                <input class="form-control" name="price" type="number" placeholder="Price" required>
+                            </div>
+
+                            <div class="form-group col-md-10 wow fadeInRight" data-wow-duration="1.8s">
+                                <textarea  class="form-control" name="description" id="exampleFormControlTextarea1" rows="2" required></textarea>
+                            </div>
+
+                            <div class="form-group col-md-10 wow fadeInRight" data-wow-duration="2s">
+                                <input type="file" name="photo" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                            
+                        </div>
+                    
+                        <input type="hidden" name="_csrf" value="<%=csrf %>">
+                    
+                        <button type="submit" class="btn btn-warning btn-lg">Upload</button>
+                    
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-12 uploaded-course" style="margin-top: 15%;">
+
+                <h3 class="upload-courses-title">Last upload courses</h3>
+                <div class="row" id="courseWrapper" style="min-height: 54vh;">
+                    <% for (let c in courses) { %>
+                        <div class="col-lg-4 col-md-6 col-12" style="margin-bottom: 20px;">
+
+                            <div class="card">
+                                <img class="card-img-top img-fluid" src="/images/course_upload_img/<%= courses[c].photo %>">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= courses[c].header_name %></h5>
+                                    <p class="card-text"><span class="card-span">Description: </span><%= courses[c].description %></p>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="course-price-title"><span class="card-span">Price: </span> <%= courses[c].price %><span class="card-span"> $</span></p>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="course-author-title"><span class="card-span">Author: </span> <%= courses[c].author %></p>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-warning col-12" style="margin: auto">Go somewhere</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    <% } %>
+                </div>
+                <ul id="pagination-demo" class="pagination-sm d-flex justify-content-center"></ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<% if(success_course) { %>
+    <!-- Modal -->
+    <div class="modal fade" id="success_course_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="font-weight: bold;" id="exampleModalCenterTitle">Administration - SOLO</h5>
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex">
+                    <div class="col-6">
+                        <img src="/images/modal_picture/check-icon.png" style="width: 150px; height: 150px;" class="img-fluid">
+                    </div>
+                    <div class="col-6">
+                        <p style="margin-top: 20px;">გილოცავთ! თქვენ მიერ წარგენილი კურსი წარმატებით აიტვირთა ჩვენს ვებ გვერძე.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="/course"  class="btn btn-warning">Thank's</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>

@@ -1,0 +1,181 @@
+<section id="users">
+
+    <div class="content-box-md">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-12" style="margin-bottom: 70px;">
+                    <div class="vertical-heading wow fadeInLeftBig">
+                        <h5>Who We Are</h5>
+                        <h2>Our Customers And<br><strong> Users</strong></h2>
+                    </div>
+                </div>
+
+                <!-- Isotope Filters-->
+                <div class="col-12 wow slideInRight" data-wow-duration="2s">
+                
+                    <div id="isotope-filters" class="d-flex justify-content-between">
+                        <button  class="btn active" data-filter="*"><span>ALL</span></button>
+                        <button  class="btn" data-filter=".სტუდენტი"><span>Student</span></button>
+                        <button  class="btn" data-filter=".მასწავლებელი"><span>Teacher</span></button>
+                        <button  class="btn" data-filter=".დირექტორი"><span>Director</span></button>
+                        <button  class="btn" data-filter=".მამრობითი"><span>Male</span></button>
+                        <button  class="btn" data-filter=".მდედრობითი"><span>Female</span></button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+</section>
+
+<!-- User Items Wrapper-->
+<section id="user-wrapper" style="min-height: 80vh;">
+
+    <div class="container">
+
+        <div class="row isotope wow fadeIn" id="usersWrapper" data-wow-duration="2s">
+
+                <% for (let i in users) { %>
+                <div class="col-lg-4 col-md-6 col-12 <%= config.status[users[i].status - 1].title %> <%= config.gender[users[i].gender - 1].title %>">
+
+                    <div class="user-card">
+
+                        <div class="user-card-box">
+
+                            <div class="user-image d-flex justify-content-center">
+                                <img src="/images/course_upload_img/<%= users[i].photo %>" class="img-fluid">
+                            </div>
+
+                            <p class="user-full-name"><%= users[i].first_name %> <%= users[i].last_name %><p>
+                            <div class="d-flex justify-content-center">
+                                <p class="user-status col-10"><%= config.status[users[i].status - 1].title %></p>
+                            </div>
+
+                            <div class="user-description col-12" style="margin-left: 25px;">
+                                <p class="user-email"><span>ელ.ფოსტა : </span><%= users[i].email %></p>
+                                <p class="user-gender"><span>სქესი : </span><%= config.gender[users[i].gender - 1].title %></p>
+                            </div>
+
+                            <ul class="col-12 d-flex justify-content-between admin-button">
+
+                                <!-- Centered edit modal -->
+                                <button type="button" class="btn btn-warning col-3 edit-btn"
+                                        data-id="<%= users[i]._id %>"
+                                        data-first-name="<%= users[i].first_name %>"
+                                        data-last-name="<%= users[i].last_name %>" 
+                                        data-status="<%= config.status[users[i].status - 1].title %>"
+                                        data-gender="<%= config.gender[users[i].gender - 1].title %>">
+                                    <i class="fas fa-user-edit"></i>
+                                </button>
+
+                                <div class="gender-photo col-3">
+                                    <img src="/images/blog/<%= users[i].icon %>.jpg" class="img-fluid user-photo" style="width: 32px; height: 32px;">
+                                </div>
+
+                                <!-- Centered delete modal -->
+                                <button type="button" data-id="<%= users[i]._id %>" class="btn btn-danger col-3 delete-btn">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <% } %>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- Hidden Content -->
+<div class="modal fade bd-example-modal-lg" id="EditConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header d-flex">
+                <h5 class="modal-title" id="exampleModalCenterTitle" style="text-align: center; font-weight: bold;">Edit user information</h5>
+            </div>
+
+            <div class="modal-body">
+                <img src="/images/modal_picture/edit-file-icon.png" style="width: 150px; height: 150px; display: block; margin: 25px auto; " class="img-fluid">
+                <form class="edit-form" action="/updatesave" method="POST">
+                    <div class="form-row justify-content-center">
+
+                        <div class="form-group col-md-10">
+                            <input type="text" name="first_name" class="form-control" placeholder="First name" value="" required>
+                        </div>
+
+                        <div class="form-group col-md-10">
+                            <input type="text" name="last_name" class="form-control" placeholder="Last name" value="" required>
+                        </div>
+
+                        <div class="form-group col-md-10">
+                            <select class="custom-select" name="status">
+                                <% for(let s in config.status) { %>
+                                    <option value="<%= config.status[s].id %>" data-title="<%= config.status[s].title %>"><%= config.status[s].title %></option>
+                                <% } %>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-10">
+                            <select class="custom-select" name="gender">
+                                <% for(let g in config.gender) { %>
+                                    <option value="<%= config.gender[g].id %>" data-title="<%= config.gender[g].title %>"><%= config.gender[g].title %></option>
+                                <% } %>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <input type="hidden" name="_csrf" value="<%=csrf %>">
+                    <input name="id" type="hidden" class="validate" value="" />
+
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-warning">Save changes</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Hidden Content -->
+<div class="modal fade bd-example-modal-lg" id="DeleteConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle" style="font-weight: bold;">Question for administration : </h5>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <img src="/images/modal_picture/delete-file-icon.png" class="img-fluid" style="display: block; margin: auto;">
+                    <p style="margin: 10px; font-family: 'Raleway', sans-serif; font-size: 19px;">Are you shure, delete this user?</p>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
+                    <a href="#" id="confirmUrl" class="btn btn-danger">Yes, I'm shure</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

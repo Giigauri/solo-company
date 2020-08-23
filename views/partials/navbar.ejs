@@ -1,0 +1,80 @@
+<header>
+    <nav id="navbar-top" class="navbar fixed-top navbar-expand-lg white-nav-top">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="/">
+                <img src="../images/logo/logo-dark.png">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars" style="color: #f4c613;"></i>
+            </button>
+            
+            <!-- Main Menu -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+
+                    <% if (activeNav == 'home') { %>
+                        <li class="nav-item"><a class="nav-link current" href="/">Home</a></li>
+                    <% } else { %>
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <% } %>
+
+
+                    <% if (activeNav == 'about') { %>
+                        <li class="nav-item"><a class="nav-link current" href="/about">About</a></li>
+                    <% } else { %>
+                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                    <% } %>
+
+
+                    <% if (activeNav == 'team') { %>
+                        <li class="nav-item"><a class="nav-link current" href="/team">Team</a></li>
+                    <% } else { %>
+                        <li class="nav-item"><a class="nav-link" href="/team">Team</a></li>
+                    <% } %>
+
+
+                    <% if (activeNav == 'price') { %>
+                        <li class="nav-item"><a class="nav-link current" href="/price">Price</a></li>
+                    <% } else { %>
+                        <li class="nav-item"><a class="nav-link" href="/price">Price</a></li>
+                    <% } %>
+
+                    <% if(isAuth) { %>
+
+                        <% if (activeNav == 'users') { %>
+                            <li class="nav-item"><a class="nav-link current" href="/users">Users</a></li>
+                        <% } else { %>
+                            <li class="nav-item"><a class="nav-link" href="/users">Users</a></li>
+                        <% } %>
+
+                        <% if (activeNav == 'course') { %>
+                            <li class="nav-item"><a class="nav-link current" href="/course">Course</a></li>
+                        <% } else { %>
+                            <li class="nav-item"><a class="nav-link" href="/course">Course</a></li>
+                        <% } %>
+
+                        <li class="nav-item"><a class="nav-link" href="/auth/logout">Log Out</a></li>
+
+                    <% } else { %>
+
+                        <% if (activeNav == 'registration') { %>
+                            <li class="nav-item"><a class="nav-link current" href="/auth/registration">Registration</a></li>
+                        <% } else { %>
+                            <li class="nav-item"><a class="nav-link" href="/auth/registration">Registration</a></li>
+                        <% } %>
+
+                        <% if (activeNav == 'auth') { %>
+                            <li class="nav-item"><a class="nav-link current" href="/auth/login">Sign In</a></li>
+                        <% } else { %>
+                            <li class="nav-item"><a class="nav-link" href="/auth/login">Sign In</a></li>
+                        <% } %>
+
+                    <% } %>
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>

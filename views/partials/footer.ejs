@@ -1,0 +1,96 @@
+<!-- JavaScript Links -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Owl.Carousel JS -->
+<script src="/scripts/owl.carousel/owl.carousel.min.js"></script>
+
+<!-- Waypoints JS -->
+<script src="/scripts/waypoints/jquery.waypoints.min.js"></script>
+
+<!-- Isotope JS -->
+<script src="/scripts/isotope/isotope.pkgd.min.js"></script>
+
+<!-- Magnific JS -->
+<script src="/scripts/magnific/jquery.magnific-popup.min.js"></script>
+
+<!-- Easing JS -->
+<script src="/scripts/easing/jquery.easing.1.3.js"></script>
+
+<!-- WOW JS -->
+<script src="/scripts/wow/wow.min.js"></script>
+
+<!-- Counter JS -->
+<script src="/scripts/counter/jquery.counterup.min.js"></script>
+
+<!-- Twps Pagination -->
+<script src="/scripts/twbsPagination/jquery.twbsPagination.min.js"></script>
+
+<!-- Templates JS -->
+<script src="/scripts/templates.js"></script>
+
+<!-- Custom JS -->
+<script src="/scripts/main.js"></script>
+
+
+
+<% if(use_pagination) { %>
+<script type="text/javascript">
+    const totalPages = `<%=pages%>`
+    const visiblePages = `<%=visiblePages%>`
+    $('#pagination-demo').twbsPagination({
+    totalPages: totalPages,
+    visiblePages: visiblePages,
+    prev:  '<i class="fas fa-angle-left fa-lg"></i>',
+    next:  '<i class="fas fa-angle-right fa-lg"></i>',
+    first: '<i class="fas fa-angle-double-left fa-lg"></i>',
+    last:  '<i class="fas fa-angle-double-right fa-lg"></i>',
+        onPageClick: function (event, page) {
+            fetch(`course/pagination/${page}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-Token': `<%=csrf %>`,
+                    'Content-Type': `application/json`
+                }
+            })
+            .then((data) =>{
+            return data.json()
+            })
+            .then((data)=> {
+                return data.map((e) => {
+                    return templates.course(e)
+                }).join('')
+            })
+            .then((data) => {
+
+
+                $("#courseWrapper").fadeOut("slow", function() {
+                    $(this).html(data).promise().done(function(){
+                        $(this).fadeIn("slow");
+                    });
+                });
+
+
+            })
+        }
+    });
+</script>
+<% } %>
+
+
+<% if(success_course) { %>
+    <script type="text/javascript">
+        $(window).on('load',function(){
+            $('#success_course_modal').modal('show');
+        });
+    </script>
+<% } %>
+
+<% if(success) { %>
+    <script type="text/javascript">
+        $(window).on('load',function(){
+            $('#success').modal('show');
+        });
+    </script>
+<% } %>

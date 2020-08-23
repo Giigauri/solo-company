@@ -1,0 +1,79 @@
+<section id="registration" style="min-height: 94.5vh;">
+
+    <div class="content-box-md">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <img src="/images/auth/auth_pic.jpg" class="img-fluid wow fadeInLeft" data-wow-duration="1.5s">
+                </div>
+
+
+                <div class="col-md-6">
+                            
+                    <form class="login-form registration-form" enctype="multipart/form-data" action="/auth/registration" method="POST">
+                        <h1 class="text-center login-welcome">Registration</h1>
+                        <div class="form-row justify-content-center">
+
+                            <div class="flash">
+                                <% if (error.length != 0) { %>
+                                        <p class="error-text"><%= error %></p>
+                                <% } %>
+                            </div>
+
+                            <div class="form-group col-md-8 d-flex wow fadeInRight" data-wow-duration="1.1s">
+                                <input type="text" name="first_name" class="form-control" placeholder="First name" required>
+                            </div>
+
+                            <div class="form-group col-md-8 d-flex wow fadeInRight" data-wow-duration="1.2s">
+                                <input type="text" name="last_name" class="form-control" placeholder="Last name" required>
+                            </div>
+
+                            <div class="form-group col-md-8 d-flex wow fadeInRight" data-wow-duration="1.3s">
+                                <select class="custom-select" name="status">
+                                    <option selected>Select your status</option>
+                                    <option value="1">Student</option>
+                                    <option value="2">Teacher</option>
+                                    <option value="3">Director</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-8 d-flex wow fadeInRight" data-wow-duration="1.4s">
+                                <select class="custom-select" name="gender">
+                                    <option selected>Select your gender</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-8 d-flex wow fadeInRight" data-wow-duration="1.5s">
+                                <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email" required>
+                            </div>
+
+                            <div class="form-group col-md-8 d-flex wow fadeInRight" data-wow-duration="1.6s">
+                                <input type="password" name="password" class="form-control" id="inputPassword4" placeholder="Password" required>
+                            </div>
+
+                            <div class="form-group col-md-8 wow fadeInRight" data-wow-duration="2s">
+                                <input type="file" name="photo" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+
+                        </div>
+
+                        <input type="hidden" name="_csrf" value="<%=csrf %>">
+
+                        <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

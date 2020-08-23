@@ -1,0 +1,55 @@
+<section id="auth" style="min-height: 94.5vh;">
+
+    <div class="content-box-md">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <img src="/images/auth/auth_pic.jpg" class="img-fluid wow fadeInLeft" data-wow-duration="1.5s">
+                </div>
+
+
+                <div class="col-md-6">
+                            
+                    <form class="login-form" action="/auth/login" method="POST">
+                        <h1 class="text-center login-welcome">Sign In</h1>
+                        <div class="form-row justify-content-center">
+
+                            <div class="flash">
+                                <% if (error.length != 0) { %>
+                                        <p class="error-text"><%= error %></p>
+                                <% } %>
+                            </div>
+
+                            <div class="form-group col-md-8 wow fadeInRight" data-wow-duration="1.5s">
+                                <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email" required>
+                            </div>
+
+                            <div class="form-group col-md-8 wow fadeInRight" data-wow-duration="1.7s">
+                                <input type="password" name="password" class="form-control" id="inputPassword4" placeholder="Password" required>
+                            </div>
+                        </div>
+                        
+                        <div class="forgot-password">
+                            <a href="/auth/reset"><p style="color: #222222; text-align: center; font-size: 18px;">Forgot password?</p></a>
+                        </div>
+
+                        
+                    
+                        <input type="hidden" name="_csrf" value="<%=csrf %>">
+                    
+                        <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+                    
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
